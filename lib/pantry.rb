@@ -8,7 +8,7 @@ class Pantry
 
   def restock(ingredient, quantity)
     new_hash = Hash.new
-    new_hash[ingredient] =  quantity
+    new_hash[ingredient] = quantity
     stock.merge!(new_hash) {|k, old_v, new_v| old_v + new_v}
   end
 
