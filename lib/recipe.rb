@@ -16,4 +16,12 @@ class Recipe
     ingredients << ingredient
     @ingredients = ingredients.uniq
   end
+
+  def total_calories
+    ingredients_required.reduce(0) do |sum, (k,v)|
+      sum + (k.calories * v)
+    end
+  end
+
+
 end
