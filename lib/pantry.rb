@@ -16,4 +16,14 @@ class Pantry
     stock[ingredient]
   end
 
+  def enough_ingredients_for?(recipe)
+    recipe.ingredients_required.each do |ingredient|
+      if ingredient.stock.has_key?(ingredient) == true
+        true
+      else
+        false
+      end
+    end
+  end
+
 end

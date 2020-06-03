@@ -1,5 +1,6 @@
 require '../lib/ingredient'
 require '../lib/pantry'
+require '../lib/recipe'
 require "minitest/autorun"
 require "minitest/pride"
 require 'pry'
@@ -28,13 +29,21 @@ class PantryTest < Minitest::Test
   end
 
   def test_it_can_check_stock_count
-
     @pantry.restock(@ingredient1, 5)
     @pantry.restock(@ingredient1, 10)
     assert_equal 15, @pantry.stock_check(@ingredient1)
 
     @pantry.restock(@ingredient2, 7)
     assert_equal 7, @pantry.stock_check(@ingredient2)
+  end
+
+  def test_it_can_determine_enough_ingredients_for_recipe
+    recipe1 = Recipe.new("Mac and Cheese")
+    recipe1.add_ingredient(@ingredient1, 2)
+    recipe1.add_ingredient(@ingredient2, 8)
+    @pantry.restock(@ingredient1, 5)
+    @pantry.restock(@ingredient1, 10)
+    assert_equal false, @pantry.enough_ingredients_for?(@recipe1)
   end
 
 end
